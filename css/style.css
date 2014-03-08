@@ -1,0 +1,155 @@
+/** 
+    *@whosaroundme
+    *version du fichier 1.0
+    *@lastmodified 2014.01.20
+    *@author Romain Malnoult
+*/
+
+
+
+body {
+    background-color:#333;  
+    font-family: Helvetica, verdana, sans-serif;   
+}
+.wrapper {
+    margin: 40px 70px 0 70px;    
+
+}
+
+#twitterfeed ul {
+	margin: 0;
+	padding: 0;
+}
+
+#twitterfeed li {
+	list-style-type: none;
+	color: #eee;
+}
+
+
+#map_canvas {
+    width: 53%;
+    /*margin: 0 auto;*/
+    height: 519px;
+    position: absolute;
+    top: 144px;
+
+}
+
+#aside {
+    width: 50px;
+    height: 90%;
+    position: absolute;
+    right: 70px;
+    top: 144px;
+    z-index: 1;
+}
+
+@keyframes bounce {
+
+    100% {width: 600px;}
+
+}
+
+@-webkit-keyframes bounce {
+
+    100% {width: 600px;}
+
+}
+
+.active #aside {
+
+    animation: bounce 0.6s ease-in 0s forwards;
+    -webkit-animation: bounce 0.6s ease-in 0s forwards;
+}
+
+h1 {
+    text-shadow: #FFF 2px 2px 0px,
+    #FFF -2px 2px 0px,
+    #FFF -2px -2px 0px,
+    #FFF 2px -2px 0px; 
+    font-weight: 900;
+    float: left;
+
+
+    -webkit-transition: all 0.4s ;
+    transition: all 0.4s ;
+}
+h1:hover {
+    text-shadow: #FFF 2px 2px 10px,
+    #FFF -2px 2px 10px,
+    #FFF -2px -2px 10px,
+    #FFF 2px -2px 10px; 
+}
+header {
+    padding: 0 100px 80px 100px;
+    margin: 0 0 20px 0px;
+    background-color: #333333;
+    z-index: 5;
+    border-bottom: solid 4px #ddd;
+}
+header p {
+    clear: both;
+    margin-top: 0;
+    color: #fff;
+}
+.clear {
+    clear: both;
+}
+input {
+    height: 40px;
+    width: 200px;
+    margin: 20px 0px 0 0;
+    border: none;   
+    float: right;
+
+}
+
+input:active, input:focus, input:hover {
+    -webkit-box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
+}
+#search {
+    height: 42px;
+    width: 50px;
+    background-image: url('../ico/search.png');
+    background-repeat: no-repeat;
+    background-position: 12px 7px;
+    margin-left: -3px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+#search:active, #search:focus, #search:hover {
+    -webkit-box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
+    box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
+}
+
+#image {
+    position: relative;
+    margin: 0 0px 0 0;
+    float: right;
+
+
+}
+
+#image img {
+    width: 400px;
+    height: auto;
+    border: 30px solid #eee;
+    border-bottom: 90px solid #eee;
+    -webkit-box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+}
+
+#image p {
+    float: right;
+    left: 48px;
+    position: absolute;
+    bottom: 21px;
+    max-width: 350px;
+    max-height: 40px;
+    overflow: hidden;
+    z-index: 2;
+
+}
