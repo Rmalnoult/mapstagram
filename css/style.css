@@ -36,20 +36,40 @@ a {
     width: 53%;
     /*margin: 0 auto;*/
     height: 519px;
-    position: absolute;
-    top: 126px;
+/*    position: absolute;*/
+    float: left;
 
+}
+
+#image {
+    width: 90%;
+    /*height: 110px;*/
+    background-color: #eee;
+    position: absolute;
+    margin: 0 0px 15px 0 0;
+    z-index: -1;
+}
+#image img {
+    width: 400px;
+    height: auto;
+    border: 30px solid #eee;
+    border-bottom: 90px solid #eee;
+    -webkit-box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
+    margin:auto;
+    position: relative;
 }
 
 #aside {
-    width: 500px;
+    width: 513px;
     height: 90%;
-    position: absolute;
-    right: 70px;
-    top: 144px;
+    position: relative;
     z-index: 1;
+    float: left;
+    margin-top: 1px;
+
 }
-.mosaic #image li {
+ #aside > ul li {
     display: inline-block;
     list-style-type: none;
     margin: 5px;
@@ -62,27 +82,26 @@ a {
     -o-transition: all 0.4s;
     transition: all 0.4s;
 }
-.mosaic #image li:hover {
-    /*margin: -5px;*/
-    /*overflow: hidden;*/
-    /*position: relative;*/
+#aside > ul li:hover {
+
     bottom: 2px;
     -webkit-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.4);
     box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.4);
 
 }
 
-.mosaic #image ul {
-    margin-left: 20px;
-    margin-top: -22px;
+#aside > ul {
+
+    position: absolute;
+    padding: 15px 29px;
+    margin: 0 51px 0 0 ;
+    background-color: #eee;
 }
 
-.mosaic #image img.thumbnail {
+img.thumbnail {
     width: 70px;
     border: none;
     box-shadow: none;
-
-    /*position: absolute;*/
 
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
@@ -91,10 +110,6 @@ a {
     transition: all 0.4s;
 }
 
-.mosaic #image img.thumbnail:hover {
-
-
-}
 
 
 h1 {
@@ -159,22 +174,10 @@ input:active, input:focus, input:hover {
     box-shadow: 3px 3px 3px 1px rgba(0,0,0,0.4);
 }
 
-#image {
-    position: relative;
-    margin: 0 0px 0 0;
-    float: right;
 
 
-}
 
-#image img {
-    width: 400px;
-    height: auto;
-    border: 30px solid #eee;
-    border-bottom: 90px solid #eee;
-    -webkit-box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
-    box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
-}
+
 
 
 
@@ -188,5 +191,30 @@ input:active, input:focus, input:hover {
     overflow: hidden;
     z-index: 2;
     text-align: center;
+
+}
+
+div.mosaicButton {
+    width: 50px;
+    height: 70px;
+    left: 0px;
+    margin-left: -50px;
+    background-color: #eee;
+    border: 1px solid black;
+    z-index: -1;
+    position: absolute;
+    opacity: 0;
+}
+.mosaicButton ul {
+    margin: 0 0 0 0;
+    padding: 8px;
+}
+.mosaicButton ul li {
+    float: left;
+    list-style-type: none;
+    width: 14px;
+    height: 14px;
+    margin: 1px;
+    background-color: #444;
 
 }

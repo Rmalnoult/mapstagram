@@ -77,10 +77,8 @@ $(document).ready(function () {
 			var thumbnail;
 		 	$('#aside').addClass('active');
 		 	$('#aside').addClass('mosaic');
-		 	$('#image ul').append('<li><img class="thumbnail" src="' + myMarker.photo + '"/></li>');
-		 	thumbnail = $('#image ul li:last-child');
-
-		 	console.log(thumbnail);
+		 	$('#aside > ul').append('<li><img class="thumbnail" src="' + myMarker.photo + '"/></li>');
+		 	thumbnail = $('#aside ul li:last-child');
 
 		 	this.onMosaicClick(myMarker, thumbnail);
 		 	this.onMosaicHover(myMarker, thumbnail);
@@ -89,8 +87,6 @@ $(document).ready(function () {
 
 		onMosaicHover : function(myMarker, thumbnail){
 		 	
-			
-
 		 	$(thumbnail).hover($.proxy(
 		 		function(){
 	   			 	myMarker.setAnimation(google.maps.Animation.BOUNCE);
@@ -98,88 +94,118 @@ $(document).ready(function () {
 	   			 		myMarker.setAnimation(null)
 	   			 	}, 2000);
 	   			},this), 500);
-
-
 		},
 
 		onMosaicClick : function(myMarker, thumbnail) {
 
 		 	$(thumbnail).on('click', $.proxy(
 		 		function(){
+		 			this.displayBigPic(myMarker);
 		 			myMarker.setAnimation(google.maps.Animation.DROP);
-		 			this.map.setCenter(myMarker.getPosition());
-		 			this.map.setZoom(4);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(6)
-	   			 	},this), 1000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(8)
-	   			 	},this), 2000);	
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(10)
-	   			 	},this), 3000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(12)
-	   			 	},this), 4000);	  
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(14)
-	   			 	},this), 5000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(16)
-	   			 	},this), 6000);	
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(18)
-	   			 	},this), 7000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(20)
-	   			 	},this), 8000);
+		 			this.map.panTo(myMarker.getPosition());
+		 			var zoomLevel = 4;
+
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 4;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 2000);	
+
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 4;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 4000);	  
+
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 4;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 6000);	
+
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 4;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 8000);
 
 		 	
 		 		}, this));
+
+			
 		 	
 		},
 
 		onMarkerClick : function(myMarker) {
 
-	        google.maps.event.addListener(myMarker, 'click', function() {
+	        google.maps.event.addListener(myMarker, 'click', $.proxy(function() {
     			// this.map.setZoom(2);
+    			
+    			this.displayBigPic(myMarker);
    			 	this.map.setCenter(myMarker.getPosition());
    			 	myMarker.setAnimation(google.maps.Animation.BOUNCE);
    			 	setTimeout(function(){
    			 		myMarker.setAnimation(null)
    			 	}, 5000);
 
-   			 		setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(6)
-	   			 	},this), 1000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(8)
-	   			 	},this), 2000);	
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(10)
-	   			 	},this), 3000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(12)
-	   			 	},this), 4000);	  
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(14)
-	   			 	},this), 5000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(16)
-	   			 	},this), 6000);	
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(18)
-	   			 	},this), 7000);
-	   			 	setTimeout($.proxy(function(){
-	   			 		this.map.setZoom(20)
-	   			 	},this), 8000);
-   			 	$('#aside').addClass('active');
-   			 	$('#aside').removeClass('mosaic');
-   			 	$('#image').empty();
-   			 	$('#image').append('<img src="' + myMarker.photo + '"/>');
-   			 	$('#image').append('<p class="caption">' + myMarker.caption + '</p>');
- 			 });
-		}
+					var zoomLevel = this.map.getZoom();
+
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel)
+	   			 	// },this), 1000);
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 2000);	
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 3000);
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 4000);	  
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 5000);
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 6000);	
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 7000);
+	   			 	// setTimeout($.proxy(function(){
+	   			 	// 	zoomLevel = zoomLevel + 2;
+	   			 	// 	this.map.setZoom(zoomLevel);
+	   			 	// },this), 8000);
+
+	   			 	
+ 			 },this));
+		},
+
+		displayBigPic: function(myMarker) {
+
+		 	$('#image').empty();
+		 	$('#image').append('<img src="' + myMarker.photo + '"/>');
+		 	$('#image').append('<p class="caption">' + myMarker.caption + '</p>');
+		 	$('#aside > ul').animate({opacity: "0", zIndex: "-1"}, 100, function(){console.log('okk')});
+		 	$('.mosaicButton').animate({opacity: "1", zIndex: "-1"}, 100, function(){console.log('ok');});
+
+		 	this.onMosaicButtonClick();
+
+		},
+
+		onMosaicButtonClick: function(){
+			// $('.mosaicButton').hover($('#aside > ul').animate({opacity: "1"}, 300, function(){console.log('todobon')}));
+			// 
+			
+			$('.mosaicButton').on('click', function () {
+				$('#aside > ul').animate({opacity: "1", zIndex: "3"}, 100, function(){});
+				$('.mosaicButton').animate({opacity: "0", zIndex: "-1"}, 100, function(){console.log('ok');});
+				this.onMosaicButtonClick();
+
+			});
+		},
 	};
 
 
@@ -217,7 +243,8 @@ $(document).ready(function () {
 
 			// clears the map
 			$('#map_canvas').empty();
-			$('#image ul').empty();	
+			$('#aside ul').empty();	
+
 			this.j = 0;			
 			// gets the input from the user 
 			this.choice = $('#userinput').val(); 
