@@ -1,5 +1,5 @@
 /** 
-    *@whosaroundme
+    *@mapstagram
     *version du fichier 1.0
     *@lastmodified 2014.01.20
     *@author Romain Malnoult
@@ -10,6 +10,11 @@
 body {
     background-color:#333;  
     font-family: Helvetica, verdana, sans-serif;   
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
 }
 .wrapper {
     margin: 40px 70px 0 70px;    
@@ -32,36 +37,65 @@ body {
     /*margin: 0 auto;*/
     height: 519px;
     position: absolute;
-    top: 144px;
+    top: 126px;
 
 }
 
 #aside {
-    width: 50px;
+    width: 500px;
     height: 90%;
     position: absolute;
     right: 70px;
     top: 144px;
     z-index: 1;
 }
+.mosaic #image li {
+    display: inline-block;
+    list-style-type: none;
+    margin: 5px;
+    position: relative;
+    overflow: hidden;
 
-@keyframes bounce {
-
-    100% {width: 600px;}
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.mosaic #image li:hover {
+    /*margin: -5px;*/
+    /*overflow: hidden;*/
+    /*position: relative;*/
+    bottom: 2px;
+    -webkit-box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.4);
+    box-shadow: 0px 3px 3px 3px rgba(0,0,0,0.4);
 
 }
 
-@-webkit-keyframes bounce {
+.mosaic #image ul {
+    margin-left: 20px;
+    margin-top: -22px;
+}
 
-    100% {width: 600px;}
+.mosaic #image img.thumbnail {
+    width: 70px;
+    border: none;
+    box-shadow: none;
+
+    /*position: absolute;*/
+
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -ms-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.mosaic #image img.thumbnail:hover {
+
 
 }
 
-.active #aside {
-
-    animation: bounce 0.6s ease-in 0s forwards;
-    -webkit-animation: bounce 0.6s ease-in 0s forwards;
-}
 
 h1 {
     text-shadow: #FFF 2px 2px 0px,
@@ -142,14 +176,17 @@ input:active, input:focus, input:hover {
     box-shadow: 0px 5px 5px 5px rgba(0,0,0,0.4);
 }
 
-#image p {
+
+
+#image p.caption {
     float: right;
     left: 48px;
     position: absolute;
-    bottom: 21px;
+    bottom: 18px;
     max-width: 350px;
-    max-height: 40px;
+    max-height: 43px;
     overflow: hidden;
     z-index: 2;
+    text-align: center;
 
 }

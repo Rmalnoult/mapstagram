@@ -7,6 +7,7 @@ $(document).ready(function () {
 		latitude: 1,
 		longitude: 1,
 		myLatlng : { },
+		mosaicHover : true,
 		
 
 		initialize : function () {
@@ -33,7 +34,8 @@ $(document).ready(function () {
 			// options for the map
 	        var mapOptions = {
 	          center: this.myLatlng,
-	          zoom: 2
+	          zoom: 2,
+	          mapTypeId: google.maps.MapTypeId.HYBRID
 	        };
 	        console.log(mapOptions);
 
@@ -49,7 +51,7 @@ $(document).ready(function () {
 
 	        this.constructMylatlng();
 
-	        // constructs a red marker and displays in on the map
+	        // constructs a marker and displays in on the map
 	        var myMarker = new window.google.maps.Marker({
 	        	position : this.myLatlng,
 	        	map : this.map,	
@@ -58,28 +60,124 @@ $(document).ready(function () {
 	        	number: pearlstagram.i,
 	        	photo : pearlstagram.photoUrl,
 	        	caption : pearlstagram.caption,
-	        	tweet : pearlstagram.tamere,
+	        	animation : google.maps.Animation.DROP
 	        });
+
 
 	        this.myMarker = myMarker;
 
+	        this.displayMosaic(myMarker);
 
 	        this.onMarkerClick(myMarker);
+
+		},
+
+		displayMosaic : function(myMarker){
+
+			var thumbnail;
+		 	$('#aside').addClass('active');
+		 	$('#aside').addClass('mosaic');
+		 	$('#image ul').append('<li><img class="thumbnail" src="' + myMarker.photo + '"/></li>');
+		 	thumbnail = $('#image ul li:last-child');
+
+		 	console.log(thumbnail);
+
+		 	this.onMosaicClick(myMarker, thumbnail);
+		 	this.onMosaicHover(myMarker, thumbnail);
+
+		},
+
+		onMosaicHover : function(myMarker, thumbnail){
+		 	
+			
+
+		 	$(thumbnail).hover($.proxy(
+		 		function(){
+	   			 	myMarker.setAnimation(google.maps.Animation.BOUNCE);
+	   			 	setTimeout(function(){
+	   			 		myMarker.setAnimation(null)
+	   			 	}, 2000);
+	   			},this), 500);
+
+
+		},
+
+		onMosaicClick : function(myMarker, thumbnail) {
+
+		 	$(thumbnail).on('click', $.proxy(
+		 		function(){
+		 			myMarker.setAnimation(google.maps.Animation.DROP);
+		 			this.map.setCenter(myMarker.getPosition());
+		 			this.map.setZoom(4);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(6)
+	   			 	},this), 1000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(8)
+	   			 	},this), 2000);	
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(10)
+	   			 	},this), 3000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(12)
+	   			 	},this), 4000);	  
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(14)
+	   			 	},this), 5000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(16)
+	   			 	},this), 6000);	
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(18)
+	   			 	},this), 7000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(20)
+	   			 	},this), 8000);
+
+		 	
+		 		}, this));
+		 	
 		},
 
 		onMarkerClick : function(myMarker) {
 
-		
 	        google.maps.event.addListener(myMarker, 'click', function() {
     			// this.map.setZoom(2);
    			 	this.map.setCenter(myMarker.getPosition());
-   			 	console.log(myMarker.title);
+   			 	myMarker.setAnimation(google.maps.Animation.BOUNCE);
+   			 	setTimeout(function(){
+   			 		myMarker.setAnimation(null)
+   			 	}, 5000);
 
-
+   			 		setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(6)
+	   			 	},this), 1000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(8)
+	   			 	},this), 2000);	
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(10)
+	   			 	},this), 3000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(12)
+	   			 	},this), 4000);	  
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(14)
+	   			 	},this), 5000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(16)
+	   			 	},this), 6000);	
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(18)
+	   			 	},this), 7000);
+	   			 	setTimeout($.proxy(function(){
+	   			 		this.map.setZoom(20)
+	   			 	},this), 8000);
    			 	$('#aside').addClass('active');
+   			 	$('#aside').removeClass('mosaic');
    			 	$('#image').empty();
    			 	$('#image').append('<img src="' + myMarker.photo + '"/>');
-   			 	$('#image').append('<p>' + myMarker.caption + '</p>');
+   			 	$('#image').append('<p class="caption">' + myMarker.caption + '</p>');
  			 });
 		}
 	};
@@ -93,6 +191,7 @@ $(document).ready(function () {
 		photoUrl : ' ',
 		result : { },
 		j : 0,
+		numberOfPics : 30,
 		next_url : ' ',
 
 
@@ -118,6 +217,7 @@ $(document).ready(function () {
 
 			// clears the map
 			$('#map_canvas').empty();
+			$('#image ul').empty();	
 			this.j = 0;			
 			// gets the input from the user 
 			this.choice = $('#userinput').val(); 
@@ -159,17 +259,7 @@ $(document).ready(function () {
 				
 				googlemaps.initialize();				
 
-				this.extractingData();
-
-
-				
-
-				
-				 // empties the html spots that will be used to display the photo
-				// $('#image, #tags ul').empty(); 
-				// $('#image').append('<img src="' + result[0].images.standard_resolution.url + '" />'); // insert the photo url in the source of an html img element to #image in the html
-				// $('#image').append('<p>' + result[0].caption.text + '</p>'); // displays caption text of the image
-				
+				this.extractingData();				
 
 			}, this));
 		},
@@ -208,8 +298,8 @@ $(document).ready(function () {
 
 				}
 
-				if (this.j < 50) {
-					$.ajax({                  // method ajax to do the query (the method we had seen in class didn't seem to work, I found this method on some forums)
+				if (this.j < this.numberOfPics) {
+					$.ajax({                  
 						url: this.next_url, // asks instagram for one picture with the tag the user chooses (choice)
 						dataType: 'jsonp'  // asks for json
 					})
@@ -217,7 +307,6 @@ $(document).ready(function () {
 
 						this.result = r.data;
 						//$('this.result').extend(r.data); // stores the object returned by api in a variable
-						console.log ('ca roule');
 						this.next_url = r.pagination.next_url;
 						console.log(result); 				
 
@@ -310,7 +399,6 @@ $(document).ready(function () {
 
 
 pearlstagram.initialize();
-twittersearch.initialize();
 
 
 // googlemaps.initialize();
